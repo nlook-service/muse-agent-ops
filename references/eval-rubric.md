@@ -41,7 +41,7 @@ The point is not the score itself — it is **using the score to make the next p
 
 ## Pass gate
 - **35/50 (avg 7.0)** or above = PASS, below = REWORK
-- On REWORK, name the single weakest axis and rewrite targeting it
+- **REWORK means rewriting the piece AND reselecting images** — a below-gate draft is not fixed with sentence edits. Rewrite targeting the weakest axis and reselect images, including the cover, from scratch
 - Gate auto-adjusts between 6–9 based on calibration (rises if the scorer grades generously)
 
 ## Required elements (REWORK if missing, independent of score)

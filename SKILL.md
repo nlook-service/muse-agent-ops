@@ -15,6 +15,7 @@ description: "전체 에이전트 운영 스킬: GitHub 이슈 기반 PM 프로�
 - **보안 프로세스**: secret-scan + pre-push hook + push protection 3중 방어
 - **에이전트 라우터**: 무거운 작업을 외부 에이전트(Claude Code 세션, Codex CLI)에 위임해 메인 에이전트 토큰 사용량 분산 (`references/agent-router.md`, `bin/agent-router.py`)
 - **콘텐츠 평가 루브릭**: 글·카피를 5대 축(풍부함·훅·재미·지식적 재미·인사이트) 50점 만점으로 채점하고, 점수로 다음 결과물을 고도화하는 루프 (`references/eval-rubric.md`)
+- **기사 제작 파이프라인**: 제목 먼저 → 소스 5개 이상 → 나의 의견 정리 → 디에디트형 구성 → 주제에 맞는 사진 → 인사이트 확인 → 5대 축 채점 → 발행. 점수 미달 시 글 재작성 + 이미지 선정 다시 (`references/article-pipeline.md`)
 - **배포 프로세스**: (정리 중 — 확정되는 대로 추가)
 - **모니터링·업데이트**: (정리 중 — 확정되는 대로 추가)
 - **업무 스킬 모음** (`skills/`): 글 등록·영어 학습 등 — 정리가 끝난 것부터 추가
