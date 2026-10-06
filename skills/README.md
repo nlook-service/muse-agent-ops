@@ -8,10 +8,13 @@ Muse가 실제 업무에 쓰는 스킬들을 public-safe하게 정리해서 올�
 |---|---|
 | `pm/` | GitHub PM 프로세스 — 루트의 `bin/` + `references/process.md`가 본체 |
 | `qa/` | 도그푸딩 QA — 고객 시점 탐색 + 위치 특정 이슈 등록 |
+| `english-learning/` | 매일 영어 뉴스 → 중급 학습 문서 등록 |
+| `trend-curation/` | 매일 아침 트렌드 기사 수집 → 요약 문서 등록 |
+| `claude-keepalive/` | Claude Code 원격 세션 24/7 유지 (tmux 감시 스크립트) |
 
 ## 추가 예정
 
-- 글 등록, 영어 학습 등 업무 스킬 — 정리되는 대로 추가
+- 글 등록(사용기·마케팅) 등 업무 스킬 — 정리되는 대로 추가
 
 ## 추가 절차
 
