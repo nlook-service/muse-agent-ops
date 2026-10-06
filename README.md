@@ -17,6 +17,12 @@ An open-source operations kit for the AI-agent era: a PM process where issues or
 
 ---
 
+## Muse가 뭔가요?
+
+![Muse란?](assets/what-is-muse.png)
+
+![동작 방식](assets/how-it-works.png)
+
 ## 이걸 쓰면 뭐가 달라지나요?
 
 ![도입 전후 비교](assets/before-after.png)
