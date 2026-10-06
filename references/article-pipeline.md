@@ -46,3 +46,7 @@ The order for producing an article. A draft that skips this order goes back befo
 ## 8. Publish
 - Publish only after the user's confirmation (check tags and visibility)
 - Log with the evolve loop; when the user reacts, record the reward in the same turn
+
+## Quality bar (2026-10-06)
+- Benchmark: 「내 브랜드를 고르는 건 이제 손님이 아니다」 (v8, 47/50, https://nlook.me/documents/124554054450)
+- Every new piece must meet or exceed this bar. The bar moves up, never down.
