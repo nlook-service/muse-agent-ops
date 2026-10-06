@@ -25,6 +25,8 @@ muse-agent-ops/
 
 ## 빠른 시작
 
+![도입 전후 비교](assets/before-after.png)
+
 ```bash
 git clone https://github.com/nlook-service/muse-agent-ops.git
 cd muse-agent-ops
@@ -40,7 +42,7 @@ python3 bin/setup.py --repo owner/name
 python3 bin/hygiene.py --repo owner/name
 ```
 
-자세한 건 `references/install-guide.md`.
+muse.ai 사용자라면 더 쉽습니다. 자세한 건 `references/install-guide.md`.
 
 ## 보안
 
