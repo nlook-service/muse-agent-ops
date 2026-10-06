@@ -1,0 +1,45 @@
+# 에이전트 라우터 설정 예시
+# 복사해서 config.yaml로 사용: cp config.example.yaml config.yaml
+# 또는 --config 플래그/AGENT_ROUTER_CONFIG 환경변수로 경로 지정
+
+# 외부 에이전트 기본값: claude | chatgpt
+default_external: claude
+
+agents:
+  muse:
+    kind: builtin
+    status: ready
+
+  claude:
+    kind: tmux
+    session: claude            # tmux 세션 이름
+    idle_marker: "❯"           # 대기 중 판정 문자열
+    strengths:
+      - 긴 글 창작·리라이팅
+      - 분석·리서치·설계
+    status: ready
+
+  chatgpt:
+    kind: codex_exec
+    command: codex             # stdin으로 브리프, stdout을 결과 파일에
+    strengths:
+      - 코드 작성·리뷰·디버깅
+      - 기술적 추론
+    status: not_configured     # `codex login` 후 ready로 변경
+
+# 부하 분산 — 메인 에이전트 사용량에 따라 외부로 넘기는 기준 조정
+load_balancing:
+  enabled: true
+  muse_usage_high_threshold: 70
+  muse_usage_critical_threshold: 90
+  weights:
+    light: muse_direct
+    medium: usage_dependent
+    heavy: external
+
+# 외부 에이전트가 응답하지 않을 때
+fallback:
+  no_response_timeout_min: 10
+  poll_interval_sec: 30
+  on_timeout: muse_takes_over
+  on_busy: muse_decides

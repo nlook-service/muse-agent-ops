@@ -13,6 +13,7 @@ description: "전체 에이전트 운영 스킬: GitHub 이슈 기반 PM 프로�
 현재 포함된 운영 영역:
 - **PM 프로세스**: 신규개발 파이프라인(기획→디자인→개발)의 단계 라벨·분야 라벨·보드·마일스톤
 - **보안 프로세스**: secret-scan + pre-push hook + push protection 3중 방어
+- **에이전트 라우터**: 무거운 작업을 외부 에이전트(Claude Code 세션, Codex CLI)에 위임해 메인 에이전트 토큰 사용량 분산 (`references/agent-router.md`, `bin/agent-router.py`)
 - **배포 프로세스**: (정리 중 — 확정되는 대로 추가)
 - **모니터링·업데이트**: (정리 중 — 확정되는 대로 추가)
 - **업무 스킬 모음** (`skills/`): 글 등록·영어 학습 등 — 정리가 끝난 것부터 추가
@@ -20,6 +21,7 @@ description: "전체 에이전트 운영 스킬: GitHub 이슈 기반 PM 프로�
 ## Tooling
 - `bin/setup.py --repo owner/name` — 라벨 세트를 대상 레포에 생성(멱등). 이미 있으면 건너뛴다.
 - `bin/hygiene.py --repo owner/name [--board-project <id>]` — 열린 이슈 전체를 점검해 분야 라벨·마일스톤·단계 라벨·보드 상태를 현재 단계에 맞게 정리한다.
+- `bin/agent-router.py --config config.yaml --brief <브리프> --expect <결과파일>` — 외부 에이전트에 위임 (전달 + 대기 + 타임아웃 판정). `--suggest --weight heavy` 로 라우팅 추천.
 - 전체 파이프라인 정의: `references/process.md`
 
 ## Auth
