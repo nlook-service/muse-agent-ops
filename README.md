@@ -46,7 +46,27 @@ An open-source operations kit for the AI-agent era: a PM process where issues or
 **스킬(Skill)이란?** Muse에게 "이렇게 일해"라고 가르치는 설명서입니다.
 이 레포는 그 설명서 + 실제로 돌리는 스크립트를 묶은 패키지입니다.
 
-## 3. 이걸 쓰면 뭐가 달라지나요?
+## 3. Muse는 이 레포를 어떻게 읽나요?
+
+Muse가 스킬을 쓰는 흐름은 이렇습니다:
+
+1. **발견** — Muse는 `workspace/skills/` 폴더를 봅니다. 각 스킬 폴더의 `SKILL.md` 맨 위에 있는 한 줄 설명을 보고, "이 일을 시킬 때 이 스킬을 쓰면 되겠다"고 판단합니다.
+2. **설치** — 사용자가 "이 스킬을 설치해줘"라고 말하면, Muse가 이 레포를 클론해서 `workspace/skills/muse-agent-ops/`에 넣습니다.
+3. **실행** — 관련 요청이 오면 Muse가 `SKILL.md`를 읽고, 적힌 절차대로 `bin/`의 스크립트를 돌립니다.
+
+**파일을 이렇게 나눈 이유:**
+
+| 파일 | 역할 | 왜 이렇게 뒀나요? |
+|---|---|---|
+| `SKILL.md` | 핵심 설명서 | 매번 읽으니까 짧게, 매번 필요한 것만 둡니다 |
+| `references/` | 상세 문서 | 필요할 때만 읽는 긴 설명·예시·가이드 |
+| `bin/` | 실행 스크립트 | 반복되는 손발은 스크립트가 대신합니다 (설명서에 길게 쓰지 않음) |
+| `assets/` | 이미지 | 결과물(README 등)에 들어가는 파일 |
+
+즉, `SKILL.md`는 "무엇을·언제"를, `references/`는 "자세히 어떻게"를, `bin/`은 "실제 손발"을 담당합니다.
+Muse는 짧은 설명서만 항상 읽고, 나머지는 필요할 때 꺼내 쓰기 때문에 빠르고 정확합니다.
+
+## 4. 이걸 쓰면 뭐가 달라지나요?
 
 ![도입 전후 비교](assets/before-after.png)
 
@@ -55,7 +75,7 @@ An open-source operations kit for the AI-agent era: a PM process where issues or
 
 ![신규개발 파이프라인](assets/pipeline.png)
 
-## 4. 어떻게 설치하나요?
+## 5. 어떻게 설치하나요?
 
 ### 방법 1 — Muse에게 말하기 (가장 쉬움)
 
@@ -78,7 +98,7 @@ python3 bin/install.py                   # 대화형으로 선택
 
 **준비물**: Python 3 · 아래 5번의 연결 — pip install 불필요, 표준 라이브러리만 씁니다.
 
-## 5. 추가로 필요한 연결 (커넥터)
+## 6. 추가로 필요한 연결 (커넥터)
 
 스킬마다 필요한 연결이 다릅니다. 필요한 것만 연결하면 됩니다.
 
@@ -92,7 +112,7 @@ python3 bin/install.py                   # 대화형으로 선택
 
 > **GitHub 토큰**: [Settings → Developer settings → Personal access tokens](https://github.com/settings/tokens)에서 fine-grained 토큰을 만들고, 해당 레포에 Issues 읽기/쓰기 권한을 주세요.
 
-## 6. nlook MCP가 뭔가요?
+## 7. nlook MCP가 뭔가요?
 
 [nlook](https://nlook.me)은 walter님이 만든 개인 기록 서비스입니다.
 **nlook MCP**는 Muse가 nlook의 문서·작업공간을 읽고 쓸 수 있게 해주는 통로입니다.
@@ -103,7 +123,7 @@ python3 bin/install.py                   # 대화형으로 선택
 
 자세한 연동 방법은 [`references/nlook-mcp-guide.md`](references/nlook-mcp-guide.md)를 참고하세요.
 
-## 7. 구성
+## 8. 구성
 
 ```
 muse-agent-ops/
@@ -130,7 +150,7 @@ muse-agent-ops/
 └── assets/                   # 다이어그램 이미지
 ```
 
-## 8. 핵심 규칙
+## 9. 핵심 규칙
 
 | 규칙 | 내용 |
 |---|---|
@@ -139,7 +159,7 @@ muse-agent-ops/
 | 보드·마일스톤 동기화 | 단계가 바뀌면 함께 이동 (기획 10월 → 디자인 10월 → 개발 10월) |
 | dry-run 기본 | `hygiene.py`는 먼저 보여주고, `--apply`로 적용 |
 
-## 9. 보안
+## 10. 보안
 
 public 레포라서 3중 방어가 내장되어 있습니다:
 
@@ -149,7 +169,7 @@ public 레포라서 3중 방어가 내장되어 있습니다:
 
 자세한 정책은 [`references/secret-policy.md`](references/secret-policy.md).
 
-## 10. 개선 참여
+## 11. 개선 참여
 
 - 버그·개선 아이디어: [Issues](https://github.com/nlook-service/muse-agent-ops/issues)에서 `버그 신고` / `개선 요청` 템플릿으로 남겨주세요
 - 개선 사이클: [`references/improvement-cycle.md`](references/improvement-cycle.md)
