@@ -46,20 +46,27 @@ muse-agent-ops/
 └── assets/                   # 다이어그램 이미지
 ```
 
-## 3분 설치
+## 3분 설치 — 원하는 것만 골라서
 
-**준비물**: Python 3 · GitHub 토큰(Issues 읽기/쓰기) — pip install 불필요, 표준 라이브러리만 씁니다.
+**준비물**: Python 3 · 스킬별 필요한 연결(아래 표) — pip install 불필요, 표준 라이브러리만 씁니다.
 
 ```bash
 git clone https://github.com/nlook-service/muse-agent-ops.git
 cd muse-agent-ops
-sh bin/install-hooks.sh            # push 전 비밀값 자동 차단
-export GITHUB_TOKEN=github_pat_xxx
-python3 bin/setup.py --repo owner/name      # 라벨 21개 설치
-python3 bin/hygiene.py --repo owner/name    # 이슈 점검 (dry-run)
+sh bin/install-hooks.sh                  # push 전 비밀값 자동 차단
+python3 bin/install.py --list            # 설치 가능한 스킬 목록
+python3 bin/install.py --skills pm,qa    # 원하는 것만 선택 설치
+python3 bin/install.py                   # 대화형으로 선택
 ```
 
-muse.ai 사용자라면 더 쉽습니다. 자세한 건 [`references/install-guide.md`](references/install-guide.md).
+| 스킬 | 필요한 연결 |
+|---|---|
+| `pm` / `qa` | GitHub 토큰 (Issues 읽기/쓰기) |
+| `english-learning` / `trend-curation` | 문서 백엔드 1개 (로컬 파일·nlook MCP·REST API 중 선택) |
+| `claude-keepalive` | 없음 (tmux + Claude Code) |
+
+nlook이 없어도 됩니다. 문서 백엔드는 로컬 파일로 시작할 수 있습니다.
+자세한 건 [`references/install-guide.md`](references/install-guide.md).
 
 ## 핵심 규칙
 

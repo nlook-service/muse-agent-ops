@@ -1,5 +1,41 @@
 # 설치 가이드 — muse.ai에서 시작하기
 
+## 0단계 — 설치하기 전에 준비할 것
+
+아래 3개만 준비하면 됩니다.
+
+- [ ] **Python 3** — 스크립트 실행용. `python3 --version`으로 확인.
+  **pip install은 필요 없습니다.** 모든 스크립트가 표준 라이브러리만 씁니다.
+- [ ] **git** — 소스 받기 + push 전 자동 검사용. 없어도 되지만 권장.
+- [ ] **GitHub 토큰** — 필수. 없으면 401 오류로 실패합니다. 발급법:
+  1. https://github.com/settings/tokens?type=beta 접속
+  2. **Generate new token** → Fine-grained token
+  3. Token name: `muse-agent-ops` / Resource owner: 자신의 org / Repository access: 적용할 레포 선택
+  4. Permissions → **Issues: Read and write** 선택 후 생성
+  5. 복사한 토큰은 Muse의 보안 입력(Secure Vault)에 등록 (채팅창에 직접 붙여넣기 금지)
+
+| 항목 | 없어도 되나? | 없으면 |
+|---|---|---|
+| pip 패키지 | 예 — 애초에 필요 없음 | 해당 없음 |
+| git | 예 (권장) | pre-push 자동 검사 불가 → `secret-scan.py` 수동 실행 |
+| GitHub 토큰 | **아니오** | 401로 모든 API 호출 실패 |
+| Muse (muse.ai) | 예 | 터미널에서 직접 실행 (아래 "직접 터미널에서 하기") |
+
+## 스킬별 필요한 연결 (커넥터)
+
+스킬마다 필요한 외부 연결이 다릅니다. 원하는 스킬의 것만 연결하면 됩니다.
+
+| 스킬 | 필요한 연결 | 연결 방법 |
+|---|---|---|
+| `pm` | GitHub (Issues 읽기/쓰기) | 위 0단계의 토큰 발급 |
+| `qa` | GitHub (Issues 읽기/쓰기) | 위 0단계의 토큰 발급 |
+| `english-learning` | 문서 백엔드 1개 | `references/doc-backend.md` 참고 — 로컬 파일 / nlook MCP / REST API 중 선택 |
+| `trend-curation` | 문서 백엔드 1개 | 위와 동일 |
+| `claude-keepalive` | 없음 (로컬 실행) | tmux + Claude Code만 있으면 됨 |
+
+**nlook이 없어도 됩니다.** 문서 백엔드는 로컬 파일 저장으로 시작할 수 있고,
+나중에 nlook이나 다른 API로 바꿀 수 있습니다.
+
 ## 이걸 쓰면 뭐가 달라지나요?
 
 ![도입 전후 비교](../assets/before-after.png)
@@ -9,18 +45,7 @@
 
 ![신규개발 파이프라인](../assets/pipeline.png)
 
-## 필요한 것과 없어도 되는 것
-
-| 항목 | 필요 여부 | 없으면 어떻게 되나 |
-|---|---|---|
-| Python 3 | 필요 | 스크립트가 실행 안 됨. 단, **pip install은 불필요** — 모든 스크립트가 표준 라이브러리만 씁니다 |
-| git | hook용으로 권장 | pre-push 자동 검사가 안 됨. `secret-scan.py`를 수동으로 돌리면 됩니다 |
-| GitHub 토큰 (PAT) | **필수** | 401 오류로 실패. 아래에서 1분 만에 발급합니다 |
-| Muse (muse.ai) | 권장 | 있으면 토큰 발급 빼고 전부 대신 해줍니다. 없으면 터미널에서 직접 실행 |
-
-**가장 쉬운 방법**: muse.ai의 Muse에게 시키세요. 사용자는 GitHub 토큰 하나만 발급하면 됩니다.
-
-## muse.ai에서 설치하기 (3단계)
+## muse.ai에서 설치하기 (2단계)
 
 ### 1단계 — Muse에게 스킬 설치 요청
 
@@ -28,22 +53,7 @@ Muse 채팅에 이렇게 말하세요:
 
 > https://github.com/nlook-service/muse-agent-ops 이 스킬을 설치해줘
 
-Muse가 레포를 가져와서 사용할 준비를 합니다.
-
-### 2단계 — GitHub 토큰 발급 (1분)
-
-1. https://github.com/settings/tokens?type=beta 접속
-2. **Generate new token** → Fine-grained token
-3. 설정:
-   - Token name: `muse-agent-ops`
-   - Resource owner: 자신의 org 선택
-   - Repository access: 적용할 레포 선택
-   - Permissions → **Issues: Read and write**
-4. 생성된 토큰을 복사
-
-> 토큰은 Muse의 보안 입력(Secure Vault)에 등록하세요. 채팅창에 직접 붙여넣지 마세요.
-
-### 3단계 — Muse에게 적용 요청
+### 2단계 — Muse에게 적용 요청
 
 > 내 레포 `my-org/my-repo`에 PM 라벨을 설치해줘
 
@@ -95,5 +105,6 @@ python3 bin/secret-scan.py                        # 비밀값 검사
 |---|---|---|
 | `401 Unauthorized` | 토큰이 없거나 만료됨 | 토큰 재발급 후 `GITHUB_TOKEN` 갱신 |
 | `403 Resource not accessible` | Issues 권한 없음 | 토큰 권한에 Issues Read and write 추가 |
+| `python3: command not found` | Python 미설치 | https://www.python.org/downloads/ 에서 설치 |
 | `이미 있음: 21` | 이미 설치됨 | 정상. 아무것도 안 바뀜 |
 | 한글 라벨이 깨져 보임 | 터미널 인코딩 | UTF-8 터미널 사용 |

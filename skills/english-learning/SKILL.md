@@ -39,7 +39,8 @@ description: "매일 영어 뉴스 기사를 골라 중급 학습자용 학습 �
 
 ### 4. 등록
 - Markdown을 `/tmp/english-study-YYYY-MM-DD-HH.md` 로 저장
-- 문서 API로 등록 (제목: `영어 학습 YYYY-MM-DD HH시: <헤드라인>`, 태그: `english-study`, `news`, `<분야>`)
+- 문서 백엔드에 등록 (제목: `영어 학습 YYYY-MM-DD HH시: <헤드라인>`, 태그: `english-study`, `news`, `<분야>`)
+- 백엔드 선택: 로컬 파일 / nlook MCP / REST API — `references/doc-backend.md` 참고
 - 등록 성공 여부를 출력으로 확인
 
 ### 5. 보고
